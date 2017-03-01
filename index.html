@@ -248,6 +248,64 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-身份证识别" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/01/身份证识别/" class="article-date">
+      <time datetime="2017-03-01T05:57:01.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/01/身份证识别/">身份证识别</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近有个需求要做身份证识别、银行卡识别、语音识别、人脸动作识别，做了好多调研工作，今天整理一篇文章。</p>
+<h3 id="身份证识别"><a href="#身份证识别" class="headerlink" title="身份证识别"></a>身份证识别</h3><p>本来是用云脉的SDK，发现他们的银行卡识别和身份证识别有冲突，所以身份证识别只好另寻方案。</p>
+<p>采用<a href="https://github.com/neng18/IDCardOCR" target="_blank" rel="external">https://github.com/neng18/IDCardOCR</a> ,内部识别SDK被封装了，看不到源码，但是识别率挺好感觉不错。</p>
+<p>另外还调研腾讯的优图，下了他们的SDK发现不能用放弃了。听说还有百度的，暂时不启用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">- (UIImage*)imageWithBufferRef:(CMSampleBufferRef)sampleBuffer&#123;</span><br><span class="line">    CVImageBufferRef buffer;</span><br><span class="line">    buffer = CMSampleBufferGetImageBuffer(sampleBuffer);</span><br><span class="line">    </span><br><span class="line">    CVPixelBufferLockBaseAddress(buffer, 0);</span><br><span class="line">    </span><br><span class="line">    //从 CVImageBufferRef 取得影像的细部信息</span><br><span class="line">    uint8_t *base;</span><br><span class="line">    size_t width, height, bytesPerRow;</span><br><span class="line">    base = CVPixelBufferGetBaseAddress(buffer);</span><br><span class="line">    width = CVPixelBufferGetWidth(buffer);</span><br><span class="line">    height = CVPixelBufferGetHeight(buffer);</span><br><span class="line">    bytesPerRow = CVPixelBufferGetBytesPerRow(buffer);</span><br><span class="line">    </span><br><span class="line">    //利用取得影像细部信息格式化 CGContextRef</span><br><span class="line">    CGColorSpaceRef colorSpace;</span><br><span class="line">    CGContextRef cgContext;</span><br><span class="line">    colorSpace = CGColorSpaceCreateDeviceRGB();</span><br><span class="line">    cgContext = CGBitmapContextCreate(base, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);</span><br><span class="line">    CGColorSpaceRelease(colorSpace);</span><br><span class="line">    </span><br><span class="line">    //透过 CGImageRef 将 CGContextRef 转换成 UIImage</span><br><span class="line">    CGImageRef cgImage;</span><br><span class="line">    UIImage *image;</span><br><span class="line">    cgImage = CGBitmapContextCreateImage(cgContext);</span><br><span class="line">    image = [UIImage imageWithCGImage:cgImage];</span><br><span class="line">    CGImageRelease(cgImage);</span><br><span class="line">    CGContextRelease(cgContext);</span><br><span class="line">    </span><br><span class="line">    CVPixelBufferUnlockBaseAddress(buffer, 0);</span><br><span class="line">    return image;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-new-will-come" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -372,7 +430,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2016 Teemo
+                2016-2017 Teemo
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.0">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
