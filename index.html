@@ -248,6 +248,60 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-BIM建模型在移动端和Web端解决方案" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/01/BIM建模型在移动端和Web端解决方案/" class="article-date">
+      <time datetime="2017-03-01T06:33:57.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/01/BIM建模型在移动端和Web端解决方案/">BIM建模型在移动端和Web端解决方案</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>先记录有空再来写</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-身份证识别" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -280,123 +334,6 @@
 <p>采用<a href="https://github.com/neng18/IDCardOCR" target="_blank" rel="external">https://github.com/neng18/IDCardOCR</a> ,内部识别SDK被封装了，看不到源码，但是识别率挺好感觉不错。</p>
 <p>另外还调研腾讯的优图，下了他们的SDK发现不能用放弃了。听说还有百度的，暂时不启用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">- (UIImage*)imageWithBufferRef:(CMSampleBufferRef)sampleBuffer&#123;</span><br><span class="line">    CVImageBufferRef buffer;</span><br><span class="line">    buffer = CMSampleBufferGetImageBuffer(sampleBuffer);</span><br><span class="line">    </span><br><span class="line">    CVPixelBufferLockBaseAddress(buffer, 0);</span><br><span class="line">    </span><br><span class="line">    //从 CVImageBufferRef 取得影像的细部信息</span><br><span class="line">    uint8_t *base;</span><br><span class="line">    size_t width, height, bytesPerRow;</span><br><span class="line">    base = CVPixelBufferGetBaseAddress(buffer);</span><br><span class="line">    width = CVPixelBufferGetWidth(buffer);</span><br><span class="line">    height = CVPixelBufferGetHeight(buffer);</span><br><span class="line">    bytesPerRow = CVPixelBufferGetBytesPerRow(buffer);</span><br><span class="line">    </span><br><span class="line">    //利用取得影像细部信息格式化 CGContextRef</span><br><span class="line">    CGColorSpaceRef colorSpace;</span><br><span class="line">    CGContextRef cgContext;</span><br><span class="line">    colorSpace = CGColorSpaceCreateDeviceRGB();</span><br><span class="line">    cgContext = CGBitmapContextCreate(base, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);</span><br><span class="line">    CGColorSpaceRelease(colorSpace);</span><br><span class="line">    </span><br><span class="line">    //透过 CGImageRef 将 CGContextRef 转换成 UIImage</span><br><span class="line">    CGImageRef cgImage;</span><br><span class="line">    UIImage *image;</span><br><span class="line">    cgImage = CGBitmapContextCreateImage(cgContext);</span><br><span class="line">    image = [UIImage imageWithCGImage:cgImage];</span><br><span class="line">    CGImageRelease(cgImage);</span><br><span class="line">    CGContextRelease(cgContext);</span><br><span class="line">    </span><br><span class="line">    CVPixelBufferUnlockBaseAddress(buffer, 0);</span><br><span class="line">    return image;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-new-will-come" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/31/new-will-come/" class="article-date">
-      <time datetime="2016-05-31T09:19:17.000Z" itemprop="datePublished">2016-05-31</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/31/new-will-come/">new will come</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h1 id="新的文章即将来了"><a href="#新的文章即将来了" class="headerlink" title="新的文章即将来了"></a>新的文章即将来了</h1><hr>
-<p>等等</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/27/hello-world/" class="article-date">
-      <time datetime="2016-05-27T06:18:44.000Z" itemprop="datePublished">2016-05-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       
     </div>
